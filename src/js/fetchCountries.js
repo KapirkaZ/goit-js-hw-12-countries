@@ -1,10 +1,15 @@
-import { errorFetch } from './notifications.js';
+export default function fetchCountries(searchQuery) {
+    if (searchQuery) {
+        return fetch(
+            `https://restcountries.eu/rest/v2/name/${searchQuery}?fields=name;population;flag;languages;capital`,
+        )
+            .then(response => {
+                if (response.ok) return response.json();
+                throw new Error('Error fetching data');
+            })
 
-function fetchCountry(searchQuery) {
-  const url = `https://restcountries.eu/rest/v2/name/${searchQuery}`;
-  return fetch(url)
-    .then(response => response.json())
-    .then(data => data)
-    .catch(() => errorFetch());
+            .catch(error => {
+                console.error('Error: ', error);
+            });
+    }
 }
-export default fetchCountry;
