@@ -1,2 +1,2 @@
 import './styles.css';
-import './js/eventListener.js';
+import './js/image-search';
